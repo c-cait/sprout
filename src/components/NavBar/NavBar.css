@@ -1,0 +1,22 @@
+.nav-container{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-btns{
+    padding-right: 40px;
+}
+
+.nav-icon-container{
+    display: inline;
+}
+
+.sprout-nav-icon{
+    font-size: 40px;
+    color: rgb(23, 82, 66);
+    padding-left: 40px;
+}
