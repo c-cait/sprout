@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Auth.css';
 import {GiLindenLeaf} from 'react-icons/gi';
+import LandingGallery from './LandingGallery';
 
-function Auth() {
+function Login() {
+    const [register, setRegister] = useState(null)
 
     return(
     <div>
@@ -11,28 +13,38 @@ function Auth() {
                 <div className='login-title'>
                     Sprout<GiLindenLeaf className='logo-leaf-icon-login'/>
                 </div>
+
                 <form className='login-form'>
-                    <input type='text' className='login-input' placeholder='username'></input>
-                    <input type='password' className='login-input' placeholder='password'></input>
-                    <button className='login-btn'
-                    >Login</button>
+
+                    <input type='text' className='login-input' placeholder='username' required></input>
+                    <input type='password' className='login-input' placeholder='password' required></input>
+
+                    {register === 'register' ? 
+                    <input type='text' className='login-input' placeholder='profile picture' required></input> :
+                    '' }
+                    
+                    {register !== 'register' ? 
+                    <button className='login-btn'>Login</button> 
+                    :
+                    <button className='login-btn'>Sign Up</button>}
+
                 </form>
+
+                {register !== 'register' ? 
                 <div className='sign-up-div'>
-                    Don't have an account? 
-                        <a href='#' className='sign-up-btn'>Sign Up</a>
+                    Don't have an account? &ensp;
+                        <button className='login-btn'
+                        onClick={() => setRegister('register')}
+                        >Sign Up</button>
                 </div>
+                :
+                <button onClick={() => setRegister(null)} className='login-btn'>Back to Login</button> }
             </div>
         </div>
 
-        <ul className='slideshow'>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
+        <LandingGallery/>
     </div>
     )
 }
 
-export default Auth;
+export default Login;
