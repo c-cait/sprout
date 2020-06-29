@@ -4,18 +4,21 @@
     /* background: rgb(252, 248, 238); */
     display: flex; 
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
 }
 
 
 .login-section{
-    height: 500px;
+    height: 550px;
     width: 500px;
     /* z-index: 1; */
     /* background: rgb(252, 248, 238); */
     position: absolute;
-    margin-right: 8%;
-    margin-top: 8%;
+    /* margin-right: 8%;
+    margin-top: 8%; */
+    /* change this margin make login on right pictures on left then overlap at certain media query */
+    margin-right: 100px;
     right: 0;
     border-radius: 10px;
     box-shadow: 0 0 10px rgb(201, 212, 197);
@@ -52,6 +55,25 @@
     font-family: 'Poppins', sans-serif;
     letter-spacing: 1px;
     outline: none;
+}
+
+.sign-up-input{
+    height: 25px;
+    width: 44%;
+    border: 1px solid rgb(53, 71, 57);
+    padding: 10px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1px;
+    outline: none;
+}
+
+.sign-up-line{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .login-input:focus{

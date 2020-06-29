@@ -21,9 +21,9 @@ app.use(
 )
 
 //auth endpoints
-app.post('/api/auth/login', ctrl.login)
 app.post('/api/auth/register', ctrl.register)
-app.delete('/api/auth/logout', ctrl.logout)
+// app.post('/api/auth/login', ctrl.login)
+// app.delete('/api/auth/logout', ctrl.logout)
 
 
 
