@@ -1,0 +1,33 @@
+.newpost-container{
+    display: flex;
+    flex-direction: column;
+    margin: 50px 50px 0px 50px;
+}
+
+.newpost-title{
+    font-family: 'Poppins', sans-serif;
+    font-size: 35px;
+    color: rgb(23, 82, 66);
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+.newpost-card-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: center;
+}
+.newpost-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 75%;
+    height: 600px;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
+    padding: 10px;
+    border-radius: 10px;
+}

@@ -1,12 +1,28 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import './Home.css'
+import {getUser} from '../../redux/reducer';
 
-function Home() {
+class Home extends Component {
+    constructor(){
+        super();
+        this.state = {
+        }
+    }
 
-    return(
-        <div>
-            Home View
-        </div>
-    )
+    componentDidMount(){
+        this.props.getUser()
+    }
+
+    render(){
+        return(
+            <div className='home-container'>
+                Welcome, {this.props.user.username}
+            </div>
+        )
+    }
 }
 
-export default Home;
+const mapStateToProps = reduxState => reduxState
+
+export default connect(mapStateToProps, {getUser})(Home);

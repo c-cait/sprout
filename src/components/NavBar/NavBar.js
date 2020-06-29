@@ -5,10 +5,20 @@ import IconButton from '@material-ui/core/IconButton';
 import PersonIcon from '@material-ui/icons/Person';
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import PostAddRoundedIcon from '@material-ui/icons/PostAddRounded';
+import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
+import {connect} from 'react-redux';
+import {logoutUser} from '../../redux/reducer';
 import {GiLindenLeaf} from 'react-icons/gi';
+import axios from 'axios';
 
-function NavBar() {
+function NavBar(props) {
 
+    const logout = () => {
+        axios.delete('/api/auth/logout')
+        .then(() => {
+            props.logoutUser()
+        })
+    }
     return(
         <div className='nav-container'>
 
@@ -35,10 +45,19 @@ function NavBar() {
                         <PostAddRoundedIcon />
                     </IconButton>
                 </Link>
+
+                <Link to='/'>
+                    <IconButton aria-label="new post" onClick={() => logout()}>
+                            <ExitToAppRoundedIcon />
+                    </IconButton>
+                </Link>
+                
             </div>
         
         </div>
     )
 }
 
-export default NavBar;
+const mapStateToProps = reduxState => reduxState
+
+export default connect(mapStateToProps, {logoutUser})(NavBar);

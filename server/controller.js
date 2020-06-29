@@ -17,11 +17,13 @@ module.exports = {
         const newUser = await db.register(first_name, last_name, email, username, hash)
 
         req.session.user = {
-            userId: newUser[0].user_id,
+            user_id: newUser[0].user_id,
             first_name: newUser[0].first_name,
             last_name: newUser[0].last_name,
             email: newUser[0].email,
             username: newUser[0].username,
+            bio: newUser[0].bio,
+            profile_pic: newUser[0].profile_pic
         }
 
         return res.status(200).send(req.session.user)
@@ -41,15 +43,30 @@ module.exports = {
         const authenticated = bcrypt.compareSync(password, user[0].password)
         if(authenticated){
             req.session.user = {
-                userId: user[0].user_id,
+                user_id: user[0].user_id,
                 first_name: user[0].first_name,
                 last_name: user[0].last_name,
                 email: user[0].email,
-                username: user[0].username
+                username: user[0].username,
+                bio: user[0].bio,
+                profile_pic: user[0].profile_pic
             }
             return res.status(200).send(req.session.user)
         } else {
             return res.status(403).send('username or password incorrect')
         }
-    }
+    },
+    
+    logout: (req, res) => {
+        req.session.destroy();
+        res.sendStatus(200);
+    },
+
+    getUser: (req, res) => {
+        if (req.session.user) {
+          res.status(200).send(req.session.user)
+        } else {
+          res.sendStatus(404)
+        }
+      }
 }
