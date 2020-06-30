@@ -56,10 +56,14 @@ app.delete('/api/auth/logout', ctrl.logout)
 
 //post endpoints
 app.post('/api/sprout/post', ctrl.createPost)
-app.get('/api/sprout/post', ctrl.getAllPosts)
+app.get('/api/sprout/posts', ctrl.getAllPosts)
 app.get('/api/sprout/post/:post_id', ctrl.getPost)
 app.get('/api/sprout/user-posts/:user_id', ctrl.getUserPosts)
+app.put('/api/sprout/post', ctrl.updatePost)
 app.delete('/api/sprout/post/:post_id', ctrl.deletePost)
+
+
+
 
 //aws s3 bucket upload
 app.post('/upload', upload.array('upl',1), function (req, res, next) {
@@ -74,7 +78,6 @@ app.post('/upload', upload.array('upl',1), function (req, res, next) {
 });
 
 
-
 massive({
     connectionString: CONNECTION_STRING,
     ssl: {rejectUnauthorized: false}
@@ -87,53 +90,6 @@ massive({
 
 app.listen(SERVER_PORT, () => console.log(`running on ${SERVER_PORT}`));
 
-
-
-
-
-
-
-// //initialize s3 interface by passing our access keys
-// const s3 = new AWS.S3({
-//     accessKeyId: AWSAccessKeyId,
-//     secretAccessKey: AWSSecretKey
-// })
-
-// //create bucket
-// // const params = {
-// //     Bucket: Bucket,
-// //     CreateBucketConfiguration: {
-// //         // Set your region here
-// //         LocationConstraint: "us-west-2"
-// //     }
-// // };
-
-// // s3.createBucket(params, function(err, data) {
-// //     if (err) console.log(err, err.stack);
-// //     else console.log('Bucket Created Successfully', data.Location);
-// // });
-
-
-// const uploadfile = (fileName) => {
-//     const fileContent = fs.readFile(fileName)
-
-//     const params = {
-//         Bucket: Bucket,
-//         Body: fileContent
-//     };
-
-//     s3.upload(params, function(err, data) {
-//         if (err) {
-//             throw err
-//         }
-//         console.log(`file upload success. ${data.location}`)
-//     })
-// }
-
-// app.post('/aws/s3', (req, res) =>{
-//     const {fileName} = req.body
-//     uploadfile(fileName)
-// })
 
 
 

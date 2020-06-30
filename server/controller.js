@@ -108,6 +108,16 @@ module.exports = {
         res.status(200).send(post)
     },
 
+    updatePost: async (req, res) => {
+        const db = req.app.get('db')
+
+        const {title, description, water, sunlight, user_id, post_id} = req.body
+
+        post = await db.update_post(title, description, water, sunlight, user_id, post_id)
+
+        res.status(200).send(post)
+    },
+
     deletePost: async (req, res) => {
         const db = req.app.get('db')
 
