@@ -5,6 +5,7 @@ import Home from './components/Home/Home';
 import Profile from './components/Profile/Profile';
 import Post from './components/Post/Post';
 import NewPost from './components/NewPost/NewPost';
+import FileUpload from './fileupload';
 
 
 export default (
@@ -14,5 +15,6 @@ export default (
         <Route path='/profile' component={Profile}/>
         <Route path='/post/:postid' component={Post}/>
         <Route path='/new' component={NewPost}/>
+        <Route path='/fileupload' component={FileUpload}/>
     </Switch>
 )

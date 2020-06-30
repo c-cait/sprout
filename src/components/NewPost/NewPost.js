@@ -17,41 +17,65 @@ class NewPost extends Component {
             water: '',
             sunlight: '',
             user_id: null,
-            fileUrl: '',
-            file: '', 
-            filename: ''
+            image_file: null,
+            image_preview: '',
         }
     }
 
-    handleChange = e => {
-        const file = e.target.files[0]
+   // Image Preview Handler
+   handleImagePreview = (e) => {
+        let image_as_base64 = URL.createObjectURL(e.target.files[0])
+        let image_as_files = e.target.files[0];
+
         this.setState({
-            fileUrl: URL.createObjectURL(file),
-            file,
-            filename: file.name
+            image_preview: image_as_base64,
+            image_file: image_as_files,
         })
     }
 
-    saveFile = () => {
-        const {fileUrl} = this.state
-        axios.post('/aws/s3', {fileUrl})
-        .then(() => {
-            console.log('success saved file')
-            this.setState({
-                fileUrl: '',
-                file: '',
-                filename: ''
+    
+    // Image/File Submit Handler
+    handleSubmitFile = () => {
+        if (this.state.image_file !== null){
+            let formData = new FormData();
+            formData.append('upl', this.state.image_file);
+            axios.post(
+                '/upload',
+                formData,
+                {
+                    headers: {
+                        "Content-type": "multipart/form-data",
+                    },                    
+                }
+            )
+            .then(res => {
+                
+                if(res.status === 200){
+                    this.setState({
+                        post_img: res.data
+                    })
+                console.log(`Success` + res.data);
+                }
+                else {
+                    console.log('failed upload')
+                    this.setState({
+                        post_img: ''
+                    })
+                }
+                
             })
-        })
-        .catch(err => {
-            console.log(err)
-        })
+            .catch(err => {
+                console.log(err);
+            })
+        }
     }
+
+    // handleCreatePost = () => {
+    //     const {title, post_img, description, water, sunlight, user_id} = this.state
+        
+    // }
 
     setTitle = (val) => {this.setState({title: val})}
-
-    setPostImg = (e) => {this.setState({})}
-
     setDescription = (val) => {this.setState({description: val})}
     setWater = (val) => {this.setState({water: val})}
     setSunlight = (val) => {this.setState({sunlight: val})}
@@ -59,10 +83,15 @@ class NewPost extends Component {
  
     componentDidMount(){
         this.props.getUser()
+        if(this.props.isLoggedIn === true){
+            this.setState({
+                user_id: this.props.user.user_id
+            })
+        }
     }
 
     render(){
-        const {title, post_img, description, water, sunlight} = this.state
+        const {image_preview, title, description, water, sunlight} = this.state
         return(
             <div className='newpost-container'>
                 <div className='newpost-title'>
@@ -78,8 +107,8 @@ class NewPost extends Component {
 
                         <div>
                             <div className='newpost-label'>Upload Image </div>
-                            <input type='file' onChange={this.handleChange}/>
-                            <img src={this.state.fileUrl} />
+                            {image_preview === '' ? '' : <img className='newpost-img-preview' src={image_preview} alt="image preview"/>}
+                            <input type='file' onChange={this.handleImagePreview} />
                         </div>
 
                         <div>
@@ -97,7 +126,7 @@ class NewPost extends Component {
                             <input type='text' placeholder='amount of sunlight exposure' className='newpost-input' value={sunlight} onChange={(e) => {this.setSunlight(e.target.value)}}/>
                         </div>  
 
-                        <button className='newpost-post-btn' onClick={this.saveFile}>
+                        <button className='newpost-post-btn' onClick={this.handleSubmitFile}>
                             Post Plant
                         </button>
 

@@ -68,5 +68,54 @@ module.exports = {
         } else {
           res.sendStatus(404)
         }
-      }
+    },
+
+    createPost: async (req, res) => {
+        const db = req.app.get('db');
+
+        const {title, post_img, description, water, sunlight, user_id} = req.body
+
+        const newPost = await db.create_post(title, post_img, description, water, sunlight, user_id);
+
+        res.status(200).send(newPost)
+    },
+
+    getAllPosts:  async (req, res) => {
+        const db = req.app.get('db')
+
+        post = await db.get_all_posts()
+
+        res.status(200).send(post)
+    },
+
+    getPost:  async (req, res) => {
+        const db = req.app.get('db')
+
+        const { post_id } = req.params
+
+        post = await db.get_post(post_id)
+
+        res.status(200).send(post[0])
+    },
+
+    getUserPosts:  async (req, res) => {
+        const db = req.app.get('db')
+
+        const { user_id } = req.params
+
+        post = await db.get_user_posts(user_id)
+
+        res.status(200).send(post)
+    },
+
+    deletePost: async (req, res) => {
+        const db = req.app.get('db')
+
+        const { post_id } = req.params
+
+        post = await db.delete_post(post_id)
+
+        res.sendStatus(200)
+    }
+    
 }

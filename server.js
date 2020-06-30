@@ -22,6 +22,7 @@ app.use(cors());
 var upload = multer({
     storage: multerS3({
         s3: s3,
+        acl: 'public-read',
         bucket: 'sprout-media',
         key: function (req, file, cb) {
             console.log(file);
@@ -54,7 +55,7 @@ app.get('/test', function (req, res) {
 
 //used by upload form
 app.post('/upload', upload.array('upl',1), function (req, res, next) {
-    console.log('req files key',req.files[0].key)
+    console.log('req files key',req.files[0].location)
     // console.log('res',res)
     res.send('upload');
 });

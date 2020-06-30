@@ -19,15 +19,7 @@ class Home extends Component {
 
     componentDidMount(){
         this.props.getUser()
-        axios.get('http://localhost:3001/test')
-        .then(res => {
-            console.log('res', this.encode(res.data.Body.data))
-
-            this.setState({image: this.encode(res.data.Body.data)})
-        })
-        .catch(err => {
-            console.log('err', err)
-        })
+        
     }
 
     render(){
@@ -37,7 +29,7 @@ class Home extends Component {
                 <div className='home-container'>
                 Welcome, {this.props.user.username}
             </div>
-             <img src={`data:image/png;base64,${image}`}/>
+
             </div>
             
         )
