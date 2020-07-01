@@ -77,9 +77,9 @@ module.exports = {
 
         const {title, post_img, description, water, sunlight, user_id} = req.body
         
-        const formatted_date = moment().format('YYYY-MM-DD HH:mm:ss');
+        const unix_date = moment().unix()
        
-        const newPost = await db.create_post(title, post_img, description, water, sunlight, user_id, formatted_date);
+        const newPost = await db.create_post(title, post_img, description, water, sunlight, user_id, unix_date);
 
         res.status(200).send(newPost)
     },
@@ -88,7 +88,7 @@ module.exports = {
         const db = req.app.get('db')
 
         post = await db.get_all_posts()
-
+        console.log(post)
         res.status(200).send(post)
     },
 
