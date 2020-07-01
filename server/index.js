@@ -54,6 +54,7 @@ app.post('/api/auth/login', ctrl.login)
 app.get('/api/auth/user', ctrl.getUser)
 app.delete('/api/auth/logout', ctrl.logout)
 
+
 //post endpoints
 app.post('/api/sprout/post', ctrl.createPost)
 app.get('/api/sprout/posts', ctrl.getAllPosts)

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './Profile.css';
+import './MainProfile.css';
 import {connect} from 'react-redux';
 import {getUser} from '../../redux/reducer';
 import tempProfile from '../../temp-profile-pic.jpeg';
@@ -55,13 +55,12 @@ function MediaCard(){
     );
 }
 
-class Profile extends Component {
+class MainProfile extends Component {
     constructor(){
         super();
         this.state ={
             userPosts: [],
             user: {},
-            user_id: null
         }
         this.getUserPosts = this.getUserPosts.bind(this);
     }
@@ -71,11 +70,11 @@ class Profile extends Component {
         this.getUserPosts()
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.match.params.user_id !== this.props.match.params.user_id) {
-            this.getUserPosts()
-        }
-      }
+    // componentWillReceiveProps(nextProps) {
+    //     if (nextProps.match.params.user_id !== this.props.match.params.user_id) {
+    //         this.getUserPosts()
+    //     }
+    //   }
 
     // componentDidUpdate(prevProps, prevState) {
     //     if(prevProps.user_id !== prevState.user_id && prevProps.user !== prevState.user) {
@@ -84,12 +83,12 @@ class Profile extends Component {
     // }
 
     getUserPosts(){
-        axios.get(`/api/sprout/user-posts/${this.props.match.params.user_id}`)
+        axios.get(`/api/sprout/user-posts/${this.props.user.user_id}`)
         .then(res => {
             console.log('res from getuser posts', res.data)
             this.setState({
                 userPosts: res.data.posts,
-                user: res.data.user[0],
+                user: res.data.user[0]
             })
             console.log('set userposts in profile component to state')
         })
@@ -110,7 +109,7 @@ class Profile extends Component {
   
 
     render(){
-        console.log('params in url', this.props.match.params.user_id)
+        console.log('params in url', this.props.user.user_id)
          return(
         <div className='profile-container'>
            <div className='profile-header'>
@@ -140,4 +139,4 @@ class Profile extends Component {
 
 const mapStateToProps = reduxState => reduxState
 
-export default connect(mapStateToProps, {getUser})(Profile);
+export default connect(mapStateToProps, {getUser})(MainProfile);

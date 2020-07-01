@@ -33,13 +33,16 @@ class Home extends Component {
 
     render(){
         return(
-            <div>
-                <div className='home-container'>
+            <div className='home-container'>
+                <div>
                     Welcome, {this.props.user.username}
                 </div>
-            {this.state.posts.map(elem => (
-               <Post key={elem.post_id} post={elem}/>
-            ))}
+                <div className='home-posts-container'>
+                    {this.state.posts.map(elem => (
+                        <Post key={elem.post_id} post={elem}/>
+                     ))}
+                </div>
+            
             </div>
             
         )

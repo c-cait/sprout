@@ -1,0 +1,38 @@
+.profile-container{
+    margin: 50px 50px 0px 50px;
+    display: flex;
+    flex-direction: column;
+    /* background: purple; */
+}
+
+.profile-header{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-img{
+    height: 100px;
+    width: 100px;
+    border: 2px solid black;
+    border-radius: 50%;
+}
+
+.profile-header-info{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    align-items: center;
+    margin-left: 20px;
+    
+}
+
+.profile-header-user-info{
+    font-size: 25px;
+}
+
+.profile-header-bio-info{
+    font-size: 20px;
+    margin-left: 10px;
+}

@@ -107,9 +107,11 @@ module.exports = {
 
         const { user_id } = req.params
 
-        post = await db.get_user_posts(user_id)
+        posts = await db.get_user_posts(user_id)
+        
+        user = await db.get_user_data(user_id)
 
-        res.status(200).send(post)
+        res.status(200).send({posts, user})
     },
 
     updatePost: async (req, res) => {
