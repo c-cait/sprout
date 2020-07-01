@@ -16,7 +16,7 @@ CREATE TABLE post(
     description TEXT,
     water TEXT,
     sunlight TEXT,
-    posting_date DATE NOT NULL DEFAULT CURRENT_DATE,
+    posting_date TIMESTAMP NOT NULL,
     user_id INT REFERENCES users(user_id)
 );
 
@@ -25,7 +25,7 @@ CREATE TABLE comment(
     user_id INT REFERENCES users(user_id),
     post_id INT REFERENCES post(post_id),
     comment TEXT,
-    posting_date DATE NOT NULL DEFAULT CURRENT_DATE
+    posting_date TIMESTAMP NOT NULL 
 );
 
 CREATE TABLE likes(

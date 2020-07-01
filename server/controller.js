@@ -1,4 +1,6 @@
 const bcrypt = require('bcrypt')
+const moment = require('moment-timezone');
+moment.tz.setDefault('Etc/UTC');
 
 module.exports = {
     register: async (req, res) => {
@@ -74,8 +76,10 @@ module.exports = {
         const db = req.app.get('db');
 
         const {title, post_img, description, water, sunlight, user_id} = req.body
-
-        const newPost = await db.create_post(title, post_img, description, water, sunlight, user_id);
+        
+        const formatted_date = moment().format('YYYY-MM-DD HH:mm:ss');
+       
+        const newPost = await db.create_post(title, post_img, description, water, sunlight, user_id, formatted_date);
 
         res.status(200).send(newPost)
     },

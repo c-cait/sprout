@@ -2,34 +2,44 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import './Home.css'
 import {getUser} from '../../redux/reducer';
+import Post from '../Post/Post'
 import axios from 'axios';
 
 class Home extends Component {
     constructor(){
         super();
         this.state = {
-            image: ''
+            posts: []
         }
     }
 
-   encode(data){
-        var str = data.reduce(function(a,b){ return a+String.fromCharCode(b) },'');
-        return btoa(str).replace(/.{76}(?=.)/g,'$&\n');
+    getAllPosts() {
+        axios.get('/api/sprout/posts')
+        .then(res => {
+            this.setState({
+                posts: res.data
+            })
+            console.log('posts', this.state.posts)
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     componentDidMount(){
         this.props.getUser()
-        
+        this.getAllPosts()
     }
 
     render(){
-        const {image} = this.state
         return(
             <div>
                 <div className='home-container'>
-                Welcome, {this.props.user.username}
-            </div>
-
+                    Welcome, {this.props.user.username}
+                </div>
+            {this.state.posts.map(elem => (
+               <Post key={elem.post_id} post={elem}/>
+            ))}
             </div>
             
         )

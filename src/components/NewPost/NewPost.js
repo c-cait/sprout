@@ -19,7 +19,21 @@ class NewPost extends Component {
             user_id: null,
             image_file: null,
             image_preview: '',
+            uploadComplete: false
         }
+    }
+
+    handleCreatePost = () => {
+        const {title, post_img, description, water, sunlight, user_id} = this.state
+        axios.post('/api/sprout/post', {title, post_img, description, water, sunlight, user_id})
+        .then(res => {
+            console.log('successful post created')
+            this.props.history.push('/home')
+        })
+        .catch(err => {
+            console.log(err)
+        })
+        
     }
 
    // Image Preview Handler
@@ -35,8 +49,8 @@ class NewPost extends Component {
 
     
     // Image/File Submit Handler
-    handleSubmitFile = () => {
-        if (this.state.image_file !== null){
+    handleSubmitFile = async () => {
+           if (this.state.image_file !== null){
             let formData = new FormData();
             formData.append('upl', this.state.image_file);
             axios.post(
@@ -52,9 +66,11 @@ class NewPost extends Component {
                 
                 if(res.status === 200){
                     this.setState({
-                        post_img: res.data
+                        post_img: res.data,
+                        uploadComplete: true
                     })
-                console.log(`Success` + res.data);
+                    console.log(`Success` + res.data);
+                    this.handleCreatePost()
                 }
                 else {
                     console.log('failed upload')
@@ -70,10 +86,6 @@ class NewPost extends Component {
         }
     }
 
-    // handleCreatePost = () => {
-    //     const {title, post_img, description, water, sunlight, user_id} = this.state
-        
-    // }
 
     setTitle = (val) => {this.setState({title: val})}
     setDescription = (val) => {this.setState({description: val})}
