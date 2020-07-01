@@ -10,7 +10,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {Link} from 'react-router-dom';
 
 
@@ -55,11 +54,6 @@ function Post(props) {
           <Link to={`/profile/${props.post.user_id}`}><Avatar aria-label="recipe" className={classes.avatar}>
             R
           </Avatar></Link>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
         }
         title={props.post.title}
         subheader={date.toLocaleDateString("en-US", options)}

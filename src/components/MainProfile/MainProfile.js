@@ -18,11 +18,11 @@ const useStyles = makeStyles({
     maxWidth: 345,
   },
   media: {
-    height: 140,
+    height: 240,
   },
 });
 
-function MediaCard(){
+function MediaCard(props){
     const classes = useStyles();
 
     return (
@@ -30,27 +30,9 @@ function MediaCard(){
         <CardActionArea>
             <CardMedia
             className={classes.media}
-            image="/static/images/cards/contemplative-reptile.jpg"
-            title="Contemplative Reptile"
+            image={props.post.post_img}
             />
-            <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-                Lizard
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-                Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                across all continents except Antarctica
-            </Typography>
-            </CardContent>
         </CardActionArea>
-        <CardActions>
-            <Button size="small" color="primary">
-            Share
-            </Button>
-            <Button size="small" color="primary">
-            Learn More
-            </Button>
-        </CardActions>
         </Card>
     );
 }
@@ -61,6 +43,9 @@ class MainProfile extends Component {
         this.state ={
             userPosts: [],
             user: {},
+            editProfile: false,
+            bio: '',
+            profile_pic: ''
         }
         this.getUserPosts = this.getUserPosts.bind(this);
     }
@@ -69,18 +54,6 @@ class MainProfile extends Component {
         this.props.getUser()
         this.getUserPosts()
     }
-
-    // componentWillReceiveProps(nextProps) {
-    //     if (nextProps.match.params.user_id !== this.props.match.params.user_id) {
-    //         this.getUserPosts()
-    //     }
-    //   }
-
-    // componentDidUpdate(prevProps, prevState) {
-    //     if(prevProps.user_id !== prevState.user_id && prevProps.user !== prevState.user) {
-    //         this.getUserPosts()
-    //     }
-    // }
 
     getUserPosts(){
         axios.get(`/api/sprout/user-posts/${this.props.user.user_id}`)
@@ -97,15 +70,12 @@ class MainProfile extends Component {
         })
     }
 
-    // static getDerivedStateFromProps(nextProps, prevState) {
-    //     console.log('next porps user_id', nextProps.match.params.user_id)
-    //     console.log('preve state', prevState)
-    //     if (nextProps.match.params.user_id !== prevState.user_id){
-    //         return { user_id: nextProps.match.params.user_id }
-    //    }
-    //    return null;
-    //  }
-
+    toggleEdit(){
+        this.setState({
+            editProfile: !this.state.editProfile
+        })
+        console.log('edit toggled')
+    }
   
 
     render(){
@@ -113,14 +83,20 @@ class MainProfile extends Component {
          return(
         <div className='profile-container'>
            <div className='profile-header'>
-                {this.state.user.first_name}
-                <img className='profile-img' src={this.state.user.profile_pic === null ? tempProfile : this.state.user.profile_pic}/>
+                <img 
+                alt={this.state.user.username} 
+                className='profile-img pointer' 
+                src={this.state.user.profile_pic === null ? tempProfile : this.state.user.profile_pic}
+                onClick={() => {this.toggleEdit()}}
+                />
                 {/* tis will be profile pic soon when edit profile fxn added */}
                 <div className='profile-header-info'>
                     <div className='profile-header-user-info'>
-
+                    {this.state.user.first_name} {this.state.user.last_name}
                         <div className='profile-header-bio-info'>
-                            {/* {this.props.user.bio} bio here */}
+                            {this.state.user.bio === null ? '': this.state.user.bio}
+                            {this.state.editProfile === true ?
+                            <input placeholder='profile bio goes here' className='bio-input'></input> : ''}
                         </div>
                     </div>
                 </div>
@@ -128,7 +104,7 @@ class MainProfile extends Component {
 
            <div>
                     {this.state.userPosts.map(elem => (
-                        <div><MediaCard/></div>
+                        <div key={elem.post_id}><MediaCard post={elem}/></div>
                     ))}
             </div>
         </div>

@@ -10,12 +10,13 @@
     height: 100px;
     display: flex;
     flex-direction: row;
+    margin-bottom: 20px;
 }
 
 .profile-img{
     height: 100px;
     width: 100px;
-    border: 2px solid black;
+    border: 2px solid rgb(53, 71, 57);
     border-radius: 50%;
 }
 
@@ -34,5 +35,5 @@
 
 .profile-header-bio-info{
     font-size: 20px;
-    margin-left: 10px;
+    margin-left: 5px;
 }
