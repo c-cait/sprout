@@ -60,8 +60,7 @@ class Profile extends Component {
         super();
         this.state ={
             userPosts: [],
-            user: {},
-            user_id: null
+            user: {}
         }
         this.getUserPosts = this.getUserPosts.bind(this);
     }
@@ -71,11 +70,11 @@ class Profile extends Component {
         this.getUserPosts()
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.match.params.user_id !== this.props.match.params.user_id) {
-            this.getUserPosts()
-        }
-      }
+    // componentWillReceiveProps(nextProps) {
+    //     if (nextProps.match.params.user_id !== this.props.match.params.user_id) {
+    //         this.getUserPosts()
+    //     }
+    //   }
 
     // componentDidUpdate(prevProps, prevState) {
     //     if(prevProps.user_id !== prevState.user_id && prevProps.user !== prevState.user) {

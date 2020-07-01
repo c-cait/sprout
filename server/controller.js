@@ -88,7 +88,7 @@ module.exports = {
         const db = req.app.get('db')
 
         post = await db.get_all_posts()
-        console.log(post)
+
         res.status(200).send(post)
     },
 
