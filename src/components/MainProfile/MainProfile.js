@@ -114,7 +114,7 @@ class MainProfile extends Component {
         <div className='profile-container'>
            <div className='profile-header'>
                 {this.state.user.first_name}
-                <img className='profile-img'/>
+                <img className='profile-img' src={this.state.user.profile_pic === null ? tempProfile : this.state.user.profile_pic}/>
                 {/* tis will be profile pic soon when edit profile fxn added */}
                 <div className='profile-header-info'>
                     <div className='profile-header-user-info'>
