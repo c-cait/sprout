@@ -17,6 +17,8 @@ import PlantPopUp from '../PlantPopUp/PlantPopUp';
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 650,
+    marginLeft: 257,
+    marginTop: 20,
   },
   media: {
     height: 0,

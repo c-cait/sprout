@@ -15,6 +15,8 @@ import {MdAddCircleOutline} from 'react-icons/md';
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
+    marginTop: 50,
+    marginRight: 0,
   },
   media: {
     height: 240,
@@ -120,9 +122,9 @@ class Profile extends Component {
                             : ''}
            </div>
 
-           <div>
+           <div >
                     {this.state.userPosts.map(elem => (
-                        <div key={elem.post_id}><MediaCard post={elem} handleOpen={this.handleOpen}/></div>
+                        <div key={elem.post_id} ><MediaCard post={elem} handleOpen={this.handleOpen} style={{marginTop: '50px'}}/></div>
                     ))}
             </div>
         </div>

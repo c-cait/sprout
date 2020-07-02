@@ -43,21 +43,21 @@ function PlantPopUp(props) {
             {props.user.user_id === props.post.user_id ? <FaTrashAlt className='trash-icon' onClick={() => deletePost()}/>  : ''}
             <div className='plant-pop-up-container'>
                 {editMode === false ? 
-                <div>{props.post.title}</div> : 
+                <div className='pop-up-title'>{props.post.title}</div> : 
                 <input value={title} placeholder={props.post.title} onChange={(e) => setTitle(e.target.value)}></input> }
                 
                 <div><img className='pop-up-img' src={props.post.post_img} /></div>
                 
                 {editMode === false ? 
-                <div>{props.post.description}</div> : 
+                <div className='pop-up-description'>{props.post.description}</div> : 
                 <input value={description} placeholder={props.post.description} onChange={(e) => setDescription(e.target.value)}></input> } 
                 
                 {editMode === false ? 
-                <div>{props.post.water}</div> : 
+                <div className='pop-up-water-sun'><span className='pop-up-label'>Water:</span> {props.post.water}</div> : 
                 <input value={water} placeholder={props.post.water} onChange={(e) => setWater(e.target.value)}></input> }
                 
                 {editMode === false ? 
-                <div>{props.post.sunlight}</div> : 
+                <div className='pop-up-water-sun'> <span className='pop-up-label'>Sunlight:</span> {props.post.sunlight}</div> : 
                 <input value={sunlight} placeholder={props.post.sunlight} onChange={(e) => setSunlight(e.target.value)}></input> }
                 
                 {editMode === false ? '' : <button onClick={() => {setEditMode(false); submitChanges()}}>Submit Changes</button> }

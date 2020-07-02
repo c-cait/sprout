@@ -4,12 +4,17 @@
 }
 .plant-pop-up-container{
     position: relative;
-    height: 500px;
-    width: 700px;
+    height: 600px;
+    width: 750px;
     background: pink;
     z-index: 20;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    padding: 10px 10px 0px 10px;
+    padding: 10px 10px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 195px;
 }
 
 .close-icon{
@@ -43,6 +48,33 @@
 }
 
 .pop-up-img{
-    height: 200px;
+    height: 420px;
     width: auto;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.pop-up-title{
+    color: rgb(23, 82, 66);
+    font-family: 'Poppins', sans-serif;
+    font-size: 30px;
+}
+
+.pop-up-description{
+    color: rgb(23, 82, 66);
+    font-family: 'Poppins', sans-serif;
+    align-self: flex-start;
+    padding-left: 80px;
+    font-size: 18px;
+}
+
+.pop-up-water-sun{
+    color: rgb(23, 82, 66);
+    font-family: 'Poppins', sans-serif;
+    align-self: flex-start;
+    padding-left: 80px;
+    font-size: 19px;
+}
+
+.pop-up-label{
+    font-size: 20px;
 }
