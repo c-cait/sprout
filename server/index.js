@@ -68,6 +68,8 @@ app.get('/api/sprout/user-posts/:user_id', ctrl.getUserPosts)
 app.put('/api/sprout/post', ctrl.updatePost)
 app.delete('/api/sprout/post/:post_id', ctrl.deletePost)
 
+app.put('/api/sprout/bio', ctrl.updateBio)
+
 
 //aws s3 bucket upload
 app.post('/upload', upload.array('upl',1), function (req, res, next) {

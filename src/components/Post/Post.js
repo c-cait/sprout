@@ -60,7 +60,10 @@ function Post(props) {
           <Card className={classes.root}>
           <CardHeader
           avatar={
-            <Link to={`/profile/${props.post.user_id}`}><Avatar aria-label="recipe" className={classes.avatar}>
+            <Link to={`/profile/${props.post.user_id}`}>
+              
+              
+            <Avatar aria-label="recipe" className={classes.avatar}>
               R
             </Avatar></Link>
           }

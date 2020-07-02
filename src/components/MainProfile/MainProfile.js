@@ -9,6 +9,8 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import PlantPopUp from '../PlantPopUp/PlantPopUp';
+import {GrEdit} from 'react-icons/gr';
+import {MdAddCircleOutline} from 'react-icons/md';
 
 
 const useStyles = makeStyles({
@@ -54,7 +56,7 @@ class MainProfile extends Component {
         this.state ={
             userPosts: [],
             user: {},
-            editProfile: false,
+            editMode: false,
             bio: '',
             profile_pic: ''
         }
@@ -81,16 +83,33 @@ class MainProfile extends Component {
         })
     }
 
-    toggleEdit(){
+    handleEditOpen(){
         this.setState({
-            editProfile: !this.state.editProfile
+            editMode: true
         })
         console.log('edit toggled')
+    }
+
+    handleEditClose(){
+        this.setState({
+            editMode: false
+        })
+    }
+
+    handleAddBio(){
+        const {bio} = this.state
+        const {user_id} = this.state.user
+        axios.put('/api/sprout/bio', {bio, user_id})
+        .then(res => {
+            console.log('updated bio')
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
   
 
     render(){
-        console.log('params in url', this.props.user.user_id)
          return(
         <div className='profile-container'>
            <div className='profile-header'>
@@ -104,13 +123,20 @@ class MainProfile extends Component {
                 <div className='profile-header-info'>
                     <div className='profile-header-user-info'>
                     {this.state.user.first_name} {this.state.user.last_name}
+
                         <div className='profile-header-bio-info'>
-                            {this.state.user.bio === null ? '': this.state.user.bio}
-                            {this.state.editProfile === true ?
-                            <input placeholder='profile bio goes here' className='bio-input'></input> : ''}
+                            {this.state.user.bio === null ? '': (this.state.editMode === true ? '' :this.state.user.bio)}
+
+                            {this.state.editMode === true ?
+                            <input placeholder='profile bio goes here' className='bio-input'
+                            onChange={(e) => this.setState({bio: e.target.value})}
+                            ></input> : ''}
                         </div>
+                    
                     </div>
                 </div>
+                        {this.state.editMode === true ? <MdAddCircleOutline className='profile-edit' onClick={() => {this.handleEditClose(); this.handleAddBio()}}/> : 
+                        <GrEdit className='profile-edit' onClick={() => this.handleEditOpen()}/> }
            </div>
 
            <div>

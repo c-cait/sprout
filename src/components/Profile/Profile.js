@@ -9,6 +9,8 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import PlantPopUp from '../PlantPopUp/PlantPopUp';
+import {GrEdit} from 'react-icons/gr';
+import {MdAddCircleOutline} from 'react-icons/md';
 
 const useStyles = makeStyles({
   root: {
@@ -53,6 +55,9 @@ class Profile extends Component {
         this.state ={
             userPosts: [],
             user: {},
+            profile_pic: '',
+            bio: '',
+            editMode: false
         }
         this.getUserPosts = this.getUserPosts.bind(this);
     }
@@ -77,6 +82,12 @@ class Profile extends Component {
         })
     }
 
+    handleEditOpen(){
+        this.setState({
+            editMode: true
+        })
+    }
+
     render(){
         console.log('params in url', this.props.match.params.user_id)
          return(
@@ -87,16 +98,26 @@ class Profile extends Component {
                 className='profile-img' 
                 src={this.state.user.profile_pic === null ? tempProfile : this.state.user.profile_pic}
                 />
-
                 {/* tis will be profile pic soon when edit profile fxn added */}
                 <div className='profile-header-info'>
+
                     <div className='profile-header-user-info'>
                     {this.state.user.first_name} {this.state.user.last_name}
+
                         <div className='profile-header-bio-info'>
-                            {/* {this.props.user.bio} bio here */}
+                            {this.state.user.bio === null ? '': this.state.user.bio}
+
+                            {this.state.editMode === true ?
+                            <input placeholder='profile bio goes here' className='bio-input' 
+                            onChange={(e) => this.setState({bio: e.target.value})}></input> : ''}
                         </div>
+                    
                     </div>
                 </div>
+                            {this.props.user.user_id === this.state.user.user_id ? 
+                            (this.state.editMode === true ? <MdAddCircleOutline/> : 
+                            <GrEdit className='profile-edit' onClick={() => this.handleEditOpen()}/>)  
+                            : ''}
            </div>
 
            <div>

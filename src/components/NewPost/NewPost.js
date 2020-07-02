@@ -141,7 +141,7 @@ class NewPost extends Component {
                             <div className='newpost-label'>Sunlight<FiSun className='newpost-icon sun'/> </div>
                             <input type='text' placeholder='amount of sunlight exposure' className='newpost-input' value={sunlight} onChange={(e) => {this.setSunlight(e.target.value)}}/>
                         </div>  
-                        {this.state.uploadComplete === 'uploading' ? <div className='loading'> <CircularProgress disableShrink style={{color: 'black'}}/> </div> : ''}
+                        {this.state.uploadComplete === 'uploading' ? <div className='loading'> <CircularProgress disableShrink style={{color: 'rgb(53, 71, 57)'}}/> </div> : ''}
                         <button className='newpost-post-btn' onClick={this.handleSubmitFile}>
                             Post Plant
                         </button>

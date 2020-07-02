@@ -132,6 +132,16 @@ module.exports = {
         post = await db.delete_post(post_id)
 
         res.sendStatus(200)
+    },
+
+    updateBio: async (req, res) => {
+        const db = req.app.get('db')
+
+        const {bio, user_id} = req.body
+
+        updatedBio = await db.update_bio(bio, user_id)
+
+        res.sendStatus(200)
     }
     
 }
