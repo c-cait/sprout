@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "main": "server/index.js",
-  "proxy": "http://localhost:4028",
+  "proxy": "http://localhost:1337",
   "dependencies": {
     "@material-ui/core": "^4.10.2",
     "@material-ui/icons": "^4.9.1",
@@ -33,7 +33,8 @@
     "redux-promise-middleware": "^6.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "startdev": "react-scripts start",
+    "start": "node server/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/1c3eb101-b0db-41cc-84f1-1ce5dda0b472/resourceGroups/sprout-backend/providers/Microsoft.Web/sites/sproutbackend",
+    "appService.deploySubpath": "."
+}

@@ -8,6 +8,8 @@ const bodyParser = require('body-parser');
 const aws = require('aws-sdk');
 const multer = require('multer');
 const multerS3 = require('multer-s3'); 
+const http = require('http');
+const path = require('path');
 
 
 aws.config.update({
@@ -21,6 +23,9 @@ const   app = express(),
 
 const ctrl = require('./controller');
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
+
+
+app.use(express.static(path.join(__dirname, '../build')))
 
 app.use(bodyParser.json());
 // app.use(express.json());
@@ -89,7 +94,19 @@ massive({
 })
 .catch(err => console.log(err))
 
-app.listen(SERVER_PORT, () => console.log(`running on ${SERVER_PORT}`));
+
+app.get('/*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
+    res.status(200);
+  });
+  
+  const server = http.createServer(app);
+  
+  const port = process.env.PORT || 1337;
+  
+  server.listen(port);
+  
+  console.log("Server running at http://localhost:%d", port);
 
 
 

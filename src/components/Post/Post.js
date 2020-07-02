@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardActions from '@material-ui/core/CardActions';
@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
 import {Link} from 'react-router-dom';
+import PlantPopUp from '../PlantPopUp/PlantPopUp';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -36,18 +37,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 function Post(props) {
-    // const [expanded, setExpanded] = React.useState(false);
-    // //use for the indiviudal post view
-    // const handleExpandClick = () => {
-    //   setExpanded(!expanded);
-    // };
+   const [popUp, setPopUp] = useState(false)
+
+  const handleOpen = () => {
+    setPopUp(true)
+  }
+  
+  const handleClose = () =>{
+    setPopUp(false)
+  }
+  
 
   console.log('user_id on post from home page', props.post.user_id)
     const classes = useStyles();
     var options = {year: 'numeric', month: 'long', day: 'numeric' };
     var date = new Date(props.post.posting_date_unix * 1000)
     return(
+      <div>
         <Card className={classes.root}>
         <CardHeader
         avatar={
@@ -59,8 +67,10 @@ function Post(props) {
         subheader={date.toLocaleDateString("en-US", options)}
         />
       <CardMedia
+      style={{cursor: 'pointer'}}
         className={classes.media}
         image={props.post.post_img}
+        onClick={() => handleOpen()}
       />
         <CardContent>
             <Typography variant="body2" color="textSecondary" >
@@ -76,7 +86,8 @@ function Post(props) {
             </IconButton>
         </CardActions>
         </Card>
-        
+        {popUp === true ? <PlantPopUp handleClose={handleClose} post={props.post}/> : ''}
+      </div>
     )
 }
 
