@@ -1,7 +1,7 @@
 .newpost-container{
     display: flex;
     flex-direction: column;
-    margin: 40px 50px 0px 50px;
+    margin: 40px 50px 50px 50px;
 }
 
 .newpost-title{
@@ -84,7 +84,7 @@
 }
 
 .newpost-post-btn{
-    margin: 0px 20px 20px 0px;
+    margin: 0px 40px 20px 0px;
     width: 35%;
     align-self: center;
     background: none;
@@ -100,3 +100,8 @@
     outline: 0;
 }
 
+.loading{
+    z-index: 20;
+    align-self: center;
+    margin-right: 40px;
+}

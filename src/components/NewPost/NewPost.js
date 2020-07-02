@@ -5,6 +5,7 @@ import {FiSun} from 'react-icons/fi';
 import {connect} from 'react-redux';
 import {getUser} from '../../redux/reducer';
 import axios from 'axios';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 class NewPost extends Component {
@@ -50,6 +51,9 @@ class NewPost extends Component {
     
     // Image/File Submit Handler
     handleSubmitFile = async () => {
+        this.setState({
+            uploadComplete: 'uploading'
+        })
            if (this.state.image_file !== null){
             let formData = new FormData();
             formData.append('upl', this.state.image_file);
@@ -137,14 +141,12 @@ class NewPost extends Component {
                             <div className='newpost-label'>Sunlight<FiSun className='newpost-icon sun'/> </div>
                             <input type='text' placeholder='amount of sunlight exposure' className='newpost-input' value={sunlight} onChange={(e) => {this.setSunlight(e.target.value)}}/>
                         </div>  
-
+                        {this.state.uploadComplete === 'uploading' ? <div className='loading'> <CircularProgress disableShrink style={{color: 'black'}}/> </div> : ''}
                         <button className='newpost-post-btn' onClick={this.handleSubmitFile}>
                             Post Plant
                         </button>
-
                     </div>
                 </div>
-                
             </div>
         )
     }

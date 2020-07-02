@@ -69,8 +69,6 @@ app.put('/api/sprout/post', ctrl.updatePost)
 app.delete('/api/sprout/post/:post_id', ctrl.deletePost)
 
 
-
-
 //aws s3 bucket upload
 app.post('/upload', upload.array('upl',1), function (req, res, next) {
     console.log('got hit')

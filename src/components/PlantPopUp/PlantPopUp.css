@@ -26,7 +26,17 @@
     position: absolute;
     right: 0;
     font-size: 20px;
-    margin-top: 50px;
+    margin-top: 100px;
+    margin-right: 10px;
+    z-index: 25;
+    cursor: pointer;
+}
+
+.trash-icon{
+    position: absolute;
+    right: 0;
+    font-size: 20px;
+    margin-top: 150px;
     margin-right: 10px;
     z-index: 25;
     cursor: pointer;
