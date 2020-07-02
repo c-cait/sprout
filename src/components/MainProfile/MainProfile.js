@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import './MainProfile.css';
 import {connect} from 'react-redux';
 import {getUser} from '../../redux/reducer';
@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
+import PlantPopUp from '../PlantPopUp/PlantPopUp';
 
 
 const useStyles = makeStyles({
@@ -22,15 +23,28 @@ const useStyles = makeStyles({
 function MediaCard(props){
     const classes = useStyles();
 
+    const [popUp, setPopUp] = useState(false)
+
+    const handleOpen = () => {
+        setPopUp(true)
+    }
+    
+    const handleClose = () =>{
+        setPopUp(false)
+    }
+
     return (
-        <Card className={classes.root}>
-        <CardActionArea>
-            <CardMedia
-            className={classes.media}
-            image={props.post.post_img}
-            />
-        </CardActionArea>
-        </Card>
+        <div>
+            {popUp === true ? <PlantPopUp handleClose={handleClose} post={props.post}/> : ''}
+            <Card className={classes.root} onClick={() => {handleOpen(); console.log('lcikced')}}>
+            <CardActionArea>
+                <CardMedia
+                className={classes.media}
+                image={props.post.post_img}
+                />
+            </CardActionArea>
+            </Card>
+        </div>
     );
 }
 

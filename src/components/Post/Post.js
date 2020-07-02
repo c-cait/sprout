@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 function Post(props) {
-   const [popUp, setPopUp] = useState(false)
+  const [popUp, setPopUp] = useState(false)
 
   const handleOpen = () => {
     setPopUp(true)
@@ -56,37 +56,37 @@ function Post(props) {
     var date = new Date(props.post.posting_date_unix * 1000)
     return(
       <div>
-        <Card className={classes.root}>
-        <CardHeader
-        avatar={
-          <Link to={`/profile/${props.post.user_id}`}><Avatar aria-label="recipe" className={classes.avatar}>
-            R
-          </Avatar></Link>
-        }
-        title={props.post.title}
-        subheader={date.toLocaleDateString("en-US", options)}
-        />
-      <CardMedia
-      style={{cursor: 'pointer'}}
-        className={classes.media}
-        image={props.post.post_img}
-        onClick={() => handleOpen()}
-      />
-        <CardContent>
-            <Typography variant="body2" color="textSecondary" >
-                {props.post.username}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" >
-            {props.post.description}
-            </Typography>
-       </CardContent>
-       <CardActions>
-            <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-            </IconButton>
-        </CardActions>
-        </Card>
         {popUp === true ? <PlantPopUp handleClose={handleClose} post={props.post}/> : ''}
+          <Card className={classes.root}>
+          <CardHeader
+          avatar={
+            <Link to={`/profile/${props.post.user_id}`}><Avatar aria-label="recipe" className={classes.avatar}>
+              R
+            </Avatar></Link>
+          }
+          title={props.post.title}
+          subheader={date.toLocaleDateString("en-US", options)}
+          />
+          <CardMedia
+          style={{cursor: 'pointer'}}
+            className={classes.media}
+            image={props.post.post_img}
+            onClick={() => handleOpen()}
+          />
+          <CardContent>
+              <Typography variant="body2" color="textSecondary" >
+                  {props.post.username}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" >
+              {props.post.description}
+              </Typography>
+        </CardContent>
+        <CardActions>
+              <IconButton aria-label="add to favorites">
+              <FavoriteIcon />
+              </IconButton>
+          </CardActions>
+          </Card>
       </div>
     )
 }
