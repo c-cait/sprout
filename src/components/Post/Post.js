@@ -9,15 +9,15 @@ import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { red } from '@material-ui/core/colors';
 import {Link} from 'react-router-dom';
+import tempProfile from '../../temp-profile-pic.png';
 import PlantPopUp from '../PlantPopUp/PlantPopUp';
 
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 650,
-    marginLeft: 257,
+    marginLeft: 287,
     marginTop: 20,
   },
   media: {
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     transform: 'rotate(180deg)',
   },
   avatar: {
-    backgroundColor: red[500],
+    backgroundColor: 'rgb(23, 82, 66)',
   },
 }));
 
@@ -63,10 +63,7 @@ function Post(props) {
           <CardHeader
           avatar={
             <Link to={`/profile/${props.post.user_id}`}>
-              
-              
-            <Avatar aria-label="recipe" className={classes.avatar}>
-              R
+            <Avatar aria-label="recipe" className={classes.avatar} img={tempProfile}>
             </Avatar></Link>
           }
           title={props.post.title}

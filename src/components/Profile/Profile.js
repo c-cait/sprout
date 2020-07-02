@@ -2,7 +2,7 @@ import React, {Component, useState} from 'react';
 import './Profile.css';
 import {connect} from 'react-redux';
 import {getUser} from '../../redux/reducer';
-import tempProfile from '../../temp-profile-pic.jpeg';
+import tempProfile from '../../temp-profile-pic.png';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
