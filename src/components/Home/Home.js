@@ -11,6 +11,7 @@ class Home extends Component {
         this.state = {
             posts: []
         }
+        this.getAllPosts = this.getAllPosts.bind(this);
     }
 
     getAllPosts() {
@@ -39,7 +40,7 @@ class Home extends Component {
                 </div>
                 <div className='home-posts-container'>
                     {this.state.posts.map(elem => (
-                        <Post key={elem.post_id} post={elem}/>
+                        <Post key={elem.post_id} post={elem} getAllPosts={this.getAllPosts}/>
                      ))}
                 </div>
             

@@ -6,7 +6,7 @@
     position: relative;
     height: 600px;
     width: 750px;
-    background: pink;
+    background: white;
     z-index: 20;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     padding: 10px 10px 10px 10px;
@@ -15,6 +15,7 @@
     justify-content: space-around;
     align-items: center;
     margin-left: 223px;
+    margin-bottom: 100px;
 }
 
 .close-icon{
@@ -77,4 +78,10 @@
 
 .pop-up-label{
     font-size: 20px;
+}
+
+.input-pop-up{
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 20px;
 }

@@ -13,9 +13,9 @@ const path = require('path');
 
 
 aws.config.update({
-    secretAccessKey: 'Mz8xb+QC7yWg7WR+NukIgN3ulqkrXSVVb9RzkDRK',
-    accessKeyId: 'AKIAJII73LPVYFRMV5OQ',
-    region: 'us-west-2'
+    secretAccessKey: '',
+    accessKeyId: '',
+    region: ''
 });
 
 const   app = express(),

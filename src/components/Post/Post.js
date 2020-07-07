@@ -58,7 +58,7 @@ function Post(props) {
     var date = new Date(props.post.posting_date_unix * 1000)
     return(
       <div>
-        {popUp === true ? <PlantPopUp handleClose={handleClose} post={props.post}/> : ''}
+        {popUp === true ? <PlantPopUp handleClose={handleClose} post={props.post} getAllPosts={props.getAllPosts}/> : ''}
           <Card className={classes.root}>
           <CardHeader
           avatar={

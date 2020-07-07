@@ -141,7 +141,7 @@ module.exports = {
 
         updatedBio = await db.update_bio(bio, user_id)
 
-        res.sendStatus(200)
+        res.send(updateBio).status(200)
     }
     
 }

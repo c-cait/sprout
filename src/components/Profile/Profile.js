@@ -14,7 +14,7 @@ import {MdAddCircleOutline} from 'react-icons/md';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 450,
     marginTop: 50,
     marginRight: 0,
   },
@@ -107,7 +107,7 @@ class Profile extends Component {
                     {this.state.user.first_name} {this.state.user.last_name}
 
                         <div className='profile-header-bio-info'>
-                            {this.state.user.bio === null ? '': this.state.user.bio}
+                            {this.state.user.bio === null ? '' : this.state.user.bio}
 
                             {this.state.editMode === true ?
                             <input placeholder='profile bio goes here' className='bio-input' 

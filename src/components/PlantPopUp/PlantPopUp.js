@@ -9,16 +9,17 @@ import axios from 'axios'
 
 function PlantPopUp(props) {
     const [editMode, setEditMode] = useState(false)
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
-    const [water, setWater] = useState('')
-    const [sunlight, setSunlight] = useState('')
+    const [title, setTitle] = useState(props.post.title)
+    const [description, setDescription] = useState(props.post.description)
+    const [water, setWater] = useState(props.post.water)
+    const [sunlight, setSunlight] = useState(props.post.sunlight)
 
     const submitChanges = () => {
         const {user_id} = props.user
         const {post_id} = props.post
         axios.put('/api/sprout/post', {title, description, water, sunlight, user_id, post_id})
         .then( res => {
+            props.getAllPosts()
             console.log('changes attempted')
         })
         .catch( err => {
@@ -29,6 +30,7 @@ function PlantPopUp(props) {
     const deletePost = () => {
         axios.delete(`/api/sprout/post/${props.post.post_id}`)
         .then(res => {
+            props.getAllPosts()
             console.log('attempted to delte post')
         })
         .catch( err => {
@@ -43,22 +45,22 @@ function PlantPopUp(props) {
             {props.user.user_id === props.post.user_id ? <FaTrashAlt className='trash-icon' onClick={() => deletePost()}/>  : ''}
             <div className='plant-pop-up-container'>
                 {editMode === false ? 
-                <div className='pop-up-title'>{props.post.title}</div> : 
-                <input value={title} placeholder={props.post.title} onChange={(e) => setTitle(e.target.value)}></input> }
+                <div className='pop-up-title'>{title}</div> : 
+                <input className='input-pop-up' value={title} placeholder={title} onChange={(e) => setTitle(e.target.value)}></input> }
                 
                 <div><img className='pop-up-img' src={props.post.post_img} /></div>
                 
                 {editMode === false ? 
-                <div className='pop-up-description'>{props.post.description}</div> : 
-                <input value={description} placeholder={props.post.description} onChange={(e) => setDescription(e.target.value)}></input> } 
+                <div className='pop-up-description'>{description}</div> : 
+                <input className='input-pop-up' value={description} placeholder={description} onChange={(e) => setDescription(e.target.value)}></input> } 
                 
                 {editMode === false ? 
-                <div className='pop-up-water-sun'><span className='pop-up-label'>Water:</span> {props.post.water}</div> : 
-                <input value={water} placeholder={props.post.water} onChange={(e) => setWater(e.target.value)}></input> }
+                <div className='pop-up-water-sun'><span className='pop-up-label'>Water:</span> {water}</div> : 
+                <input className='input-pop-up' value={water} placeholder={water} onChange={(e) => setWater(e.target.value)}></input> }
                 
                 {editMode === false ? 
-                <div className='pop-up-water-sun'> <span className='pop-up-label'>Sunlight:</span> {props.post.sunlight}</div> : 
-                <input value={sunlight} placeholder={props.post.sunlight} onChange={(e) => setSunlight(e.target.value)}></input> }
+                <div className='pop-up-water-sun'> <span className='pop-up-label'>Sunlight:</span> {sunlight}</div> : 
+                <input className='input-pop-up'value={sunlight} placeholder={props.post.sunlight} onChange={(e) => setSunlight(e.target.value)}></input> }
                 
                 {editMode === false ? '' : <button onClick={() => {setEditMode(false); submitChanges()}}>Submit Changes</button> }
             </div>

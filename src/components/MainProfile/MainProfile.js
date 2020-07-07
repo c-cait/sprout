@@ -15,7 +15,7 @@ import {MdAddCircleOutline} from 'react-icons/md';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 450,
     marginTop: 50,
     marginRight: 0
   },
@@ -39,7 +39,7 @@ function MediaCard(props){
 
     return (
         <div>
-            {popUp === true ? <PlantPopUp handleClose={handleClose} post={props.post}/> : ''}
+            {popUp === true ? <PlantPopUp handleClose={handleClose} post={props.post} getAllPosts={props.getUserPosts}/> : ''}
             <Card className={classes.root} onClick={() => {handleOpen(); console.log('lcikced')}}>
             <CardActionArea>
                 <CardMedia
@@ -59,7 +59,6 @@ class MainProfile extends Component {
             userPosts: [],
             user: {},
             editMode: false,
-            bio: '',
             profile_pic: ''
         }
         this.getUserPosts = this.getUserPosts.bind(this);
@@ -99,10 +98,16 @@ class MainProfile extends Component {
     }
 
     handleAddBio(){
-        const {bio} = this.state
+        const {bio} = this.state.user
         const {user_id} = this.state.user
         axios.put('/api/sprout/bio', {bio, user_id})
         .then(res => {
+            this.setState(prevState => ({
+                user: {
+                    ...prevState.user,
+                    bio: res.data
+                }
+            }))
             console.log('updated bio')
         })
         .catch(err => {
@@ -127,11 +132,18 @@ class MainProfile extends Component {
                     {this.state.user.first_name} {this.state.user.last_name}
 
                         <div className='profile-header-bio-info'>
-                            {this.state.user.bio === null ? '': (this.state.editMode === true ? '' :this.state.user.bio)}
+                            {this.state.user.bio === null ? '': (this.state.editMode === true ? '' : this.state.user.bio)}
 
                             {this.state.editMode === true ?
-                            <input placeholder='profile bio goes here' className='bio-input'
-                            onChange={(e) => this.setState({bio: e.target.value})}
+                            <input placeholder='profile bio goes here' className='bio-input' value={this.state.user.bio}
+                            onChange={(e) => {
+                                let newVal = e.target.value
+                                this.setState(prevState => ({
+                                user: {
+                                    ...prevState.user,
+                                    bio: newVal
+                                }
+                            }))}}
                             ></input> : ''}
                         </div>
                     
@@ -143,7 +155,7 @@ class MainProfile extends Component {
 
            <div>
                 {this.state.userPosts.map(elem => (
-                    <div key={elem.post_id}><MediaCard post={elem}/></div>
+                    <div key={elem.post_id}><MediaCard post={elem} getUserPosts={this.getUserPosts}/></div>
                 ))}
             </div>
         </div>
