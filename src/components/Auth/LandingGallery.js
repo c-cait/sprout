@@ -1,10 +1,11 @@
 import React from 'react';
 import './LandingGallery.css';
+import Grid from '@material-ui/core/Grid';
 
 function LandingGallery() {
 
     return(
-        <div>
+        <Grid item xs={12} md={6}>
             <ul className='slideshow'>
                 <li></li>
                 <li></li>
@@ -12,7 +13,7 @@ function LandingGallery() {
                 <li></li>
                 <li></li>
             </ul>
-        </div>
+        </Grid> 
     )
 }
 

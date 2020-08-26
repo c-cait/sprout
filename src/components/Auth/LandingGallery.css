@@ -1,3 +1,8 @@
+.slideshow{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
 
 .slideshow li { 
     width: 50%;
@@ -11,9 +16,15 @@
     opacity: 0;
     z-index: 0;
     animation: imageAnimation 20s linear infinite; 
-  }
+}
 
-  .slideshow li:nth-child(1) { 
+@media (max-width: 960px){
+  .slideshow li {
+    width: 100%;
+  }
+}
+
+.slideshow li:nth-child(1) { 
     background-image: url(../../LandingPhotos/mainCacti.jpg)
 
 }
@@ -39,7 +50,6 @@
 }
 
 @keyframes imageAnimation { 
-
     0% { 
       opacity: 0; 
       animation-timing-function: ease-in;
@@ -55,3 +65,4 @@
       opacity: 0
     }
 }
+

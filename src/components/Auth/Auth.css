@@ -1,25 +1,12 @@
+
 .login-container {
-    height: 100vh;
-    width: 100vw;
-    /* background: rgb(252, 248, 238); */
-    display: flex; 
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    z-index: 10;
 }
 
-
 .login-section{
+    background: white;
     height: 550px;
     width: 500px;
-    /* z-index: 1; */
-    /* background: rgb(252, 248, 238); */
-    position: absolute;
-    /* margin-right: 8%;
-    margin-top: 8%; */
-    /* change this margin make login on right pictures on left then overlap at certain media */
-    margin-right: 100px;
-    right: 0;
     border-radius: 10px;
     box-shadow: 0 0 10px rgb(201, 212, 197);
     display: flex;
@@ -93,7 +80,6 @@
     cursor: pointer;
     outline: 0;
 }
-
 
 .sign-up-div {
     color: rgb(53, 71, 57);
